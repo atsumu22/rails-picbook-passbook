@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  author: MyString
+  year: 2023-04-26 00:03:16
+  publisher: MyString
+  original_price: 1
+
+two:
+  name: MyString
+  author: MyString
+  year: 2023-04-26 00:03:16
+  publisher: MyString
+  original_price: 1
