@@ -72,3 +72,6 @@ group :test do
 end
 
 gem "devise"
+gem "font-awesome-sass", "~> 6.1"
+gem "simple_form"
+gem "autoprefixer-rails"
