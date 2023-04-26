@@ -2,10 +2,10 @@
 
 one:
   comment: MyText
+  book: one
   user: one
-  books: one
 
 two:
   comment: MyText
+  book: two
   user: two
-  books: two

@@ -3,13 +3,13 @@
 one:
   name: MyString
   author: MyString
-  year: 2023-04-26 00:03:16
+  published_at: 2023-04-26 11:40:01
   publisher: MyString
   original_price: 1
 
 two:
   name: MyString
   author: MyString
-  year: 2023-04-26 00:03:16
+  published_at: 2023-04-26 11:40:01
   publisher: MyString
   original_price: 1
