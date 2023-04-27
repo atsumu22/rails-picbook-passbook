@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :logs
   resources :books, only: %i[index show]
   resources :bookmarks
+  resources :users, only: %i[edit update destroy]
+  get '/profile', to: 'users#profile'
 end

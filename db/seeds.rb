@@ -14,8 +14,8 @@ User.destroy_all
 puts "Creating Users..."
 
 User.create([
-  { email: "kyo@example.com", password: "123456", first_name: "Kyo" },
-  { email: "jun@example.com", password: "123456", first_name: "Jun"  }
+  { email: "kyo@example.com", password: "123456", user_name: "Kyo" },
+  { email: "jun@example.com", password: "123456", user_name: "Jun"  }
 ])
 
 puts "finished creating users!!"

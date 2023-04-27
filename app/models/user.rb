@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :books, through: :logs, dependent: :destroy
 
   validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
+  validates :user_name, presence: true, length: { minimum: 1 }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
