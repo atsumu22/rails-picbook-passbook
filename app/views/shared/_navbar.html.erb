@@ -1,32 +1,40 @@
 <div class="navbar navbar-expand navbar-light navbar-lewagon">
   <ul class="navbar-nav me-auto">
     <% if user_signed_in? %>
-      <li class="nav-item active">
-        <%= link_to profile_path, class: "nav-link" do %>
-          <i class="fa-solid fa-user"></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "#", class: "nav-link" do %>
-          <i class="fa-solid fa-chart-pie"></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "#", class: "nav-link" do %>
-          <i class="fa-solid fa-magnifying-glass"></i>
-        <% end %>
-      </li>
-      <li></li>
-      <li class="nav-item">
-        <%= link_to "#", class: "nav-link" do %>
-          <i class="fa-solid fa-bookmark"></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "#", class: "nav-link" do %>
-          <i class="fa-solid fa-gear"></i>
-        <% end %>
-      </li>
+      <div class="navbar-nav__left">
+        <li class="nav-item active">
+          <%= link_to logs_path, class: "nav-link" do %>
+            <i class="fa-solid fa-credit-card"></i>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "#", class: "nav-link" do %>
+            <i class="fa-solid fa-chart-pie"></i>
+          <% end %>
+        </li>
+      </div>
+
+      <div class="navbar-nav__center">
+        <li class="navbar-nav__center__item nav-item">
+          <%= link_to "#", class: "nav-link" do %>
+            <i class="fa-solid fa-magnifying-glass"></i>
+          <% end %>
+        </li>
+      </div>
+
+      <div class="navbar-nav__right">
+        <li class="nav-item">
+          <%= link_to bookmarks_path, class: "nav-link" do %>
+            <i class="fa-solid fa-bookmark"></i>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to profile_path, class: "nav-link" do %>
+            <i class="fa-solid fa-user"></i>
+          <% end %>
+        </li>
+      </div>
+
       <%# <li class="nav-item dropdown"> %>
       <%# <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> %>
         <%# <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>

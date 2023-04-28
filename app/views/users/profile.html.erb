@@ -1,3 +1,24 @@
+<div class="header">
+  <div class="avatar">
+
+  </div>
+</div>
+
 <div class="container">
- <h1>this is <%= current_user.user_name %>'s page!</h1>
+  <h2><%= current_user.user_name %></h2>
+  <ul class="profile__items">
+    <li>
+      <%= link_to edit_user_path(current_user) do %>
+        <i class="fa-solid fa-gear"></i> Your Account
+      <% end %>
+    </li>
+
+    <li><i class="fa-solid fa-key"></i> Change Your Password</li>
+
+    <li>
+      <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
+        <i class="fa-solid fa-right-from-bracket"></i> Log out
+      <% end%>
+    </li>
+   </ul>
 </div>
