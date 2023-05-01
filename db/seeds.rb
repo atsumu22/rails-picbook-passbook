@@ -24,10 +24,13 @@ puts "finished creating users!!"
 
 puts "Creating Books..."
 
-url = "https://www.googleapis.com/books/v1/volumes?q=かこさとし"
-@data = JSON.parse(URI.open(url).read)
+Book.create([
+  { name: "だるまちゃんとキジムナちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { name: "だるまちゃんとだるまちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { name: "だるまちゃんとかみなりちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { name: "だるまちゃんとてんぐちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { name: "だるまちゃんとうんこちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { name: "だるまちゃんとおにちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 }
+])
 
-@data["results"].each do |book|
-  Book.create!(name: book["title"], author: book["overview"], published_at: book["poster_path"], publisher: book["vote_average"], original_price: book[""])
-end
 puts "done!"
