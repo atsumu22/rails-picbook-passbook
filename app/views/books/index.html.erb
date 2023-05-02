@@ -1,8 +1,9 @@
-<h1>Books index</h1>
-<ul>
-<% @books.each do |book| %>
-<li>
-<%= book.name %>
-</li>
-<% end %>
-</ul>
+<div class="container">
+  <ul class="books-index">
+    <% @books.each do |book| %>
+      <li>
+        <%= render 'book_card', book: book %>
+      </li>
+    <% end %>
+  </ul>
+</div>

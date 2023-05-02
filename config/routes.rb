@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[edit update destroy]
   get '/profile', to: 'users#profile'
   get '/search', to: 'pages#search'
+  get '/query', to: 'pages#query'
+  get '/barcode', to: 'pages#barcode'
   get '/statistics', to: 'pages#statistics'
 end
