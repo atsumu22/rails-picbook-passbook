@@ -1,4 +1,4 @@
-class BooksPolicy < ApplicationPolicy
+class BookPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
@@ -7,6 +7,6 @@ class BooksPolicy < ApplicationPolicy
   end
 
   def show?
-    return true
+    true
   end
 end
