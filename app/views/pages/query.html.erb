@@ -1,0 +1,13 @@
+<div class="searcharea">
+  <div class="searchbar">
+  <input type="text" placeholder="type books title">
+  <button>
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+  </div>
+</div>
+<div class="container">
+  <% @books.each do |book| %>
+    <%= render 'books/book_card', book: book %>
+  <% end %>
+</div>

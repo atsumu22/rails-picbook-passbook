@@ -7,6 +7,13 @@ class PagesController < ApplicationController
   def search
   end
 
+  def query
+    @books = Book.all
+  end
+
+  def barcode
+  end
+
   def statistics
   end
 end
