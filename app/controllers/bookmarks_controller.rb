@@ -5,4 +5,17 @@ class BookmarksController < ApplicationController
     @user = current_user
     @bookmarks = policy_scope(Bookmark).where(user: @user)
   end
+
+  def new
+    @bookmark = Bookmark.new
+    authorize @bookmark
+  end
+
+  def create
+    @bookmark = Bookmark.new
+  end
+
+  private
+
+  def set
 end
