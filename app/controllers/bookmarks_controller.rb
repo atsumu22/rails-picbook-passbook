@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  # before_action :set_lesson, only: %i[new create edit update]
+  before_action :set_book, only: %i[new create]
 
   def index
     @user = current_user
@@ -13,9 +13,15 @@ class BookmarksController < ApplicationController
 
   def create
     @bookmark = Bookmark.new
+    @bookmark.book = @book
+    @bookmark.user = current_user
+    authorize @bookmark
+    @bookmark.save
   end
 
   private
 
-  def set
+  def set_book
+    @book = Book.find(params[:book_id])
+  end
 end
