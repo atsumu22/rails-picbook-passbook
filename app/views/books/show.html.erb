@@ -1,2 +1,3 @@
 <h1>this books detail!</h1>
-<%= link_to "+Bookmark", new_book_bookmark_path(@book) %>
+<%# <%= link_to "+Bookmark", new_book_bookmark_path(@book) %>
+<%= render 'bookmarks/new', book: @book, bookmark: @bookmark %>

@@ -10,9 +10,7 @@
           <p class="bookinfo__author"><%= book.author %></p>
           <p class="bookinfo__publisher"><%= book.publisher %></p>
           <div class="bookinfo__buttons">
-          <%= link_to "detail", book_path(book) %>
-            <%# <%= render "books/bookmark_button" %> %>
-            <button class="bookinfo__buttons__item add-log">+ Add</button>
+          <%= link_to "detail", book_path(book), class: "btn btn-primary" %>
           </div>
         </div>
       </div>

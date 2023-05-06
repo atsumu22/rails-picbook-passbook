@@ -15,8 +15,15 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new
     @bookmark.book = @book
     @bookmark.user = current_user
+    @user = current_user
+    @bookmarks = policy_scope(Bookmark).where(user: @user)
+    @duplicated_checker = @bookmarks.map do |bookmark|
+      bookmark.book == @book
+    end
     authorize @bookmark
-    @bookmark.save
+    if @duplicated_checker.none?(true)
+      @bookmark.save
+    end
   end
 
   private
