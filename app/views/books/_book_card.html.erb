@@ -1,14 +1,19 @@
-<div class="bookcard">
-  <div class="bookimg">
-    <span></span>
-  </div>
-  <div class="bookinfo">
-    <p class="bookinfo__title"><%= book.name %></p>
-    <p class="bookinfo__author"><%= book.author %></p>
-    <p class="bookinfo__publisher"><%= book.publisher %></p>
-    <div class="bookinfo__buttons">
-      <button class="bookinfo__buttons__item bookmark">+ Bookmark</button>
-      <button class="bookinfo__buttons__item add-log">+ Add</button>
-    </div>
-  </div>
-</div>
+<ul class="books-index">
+  <% @books.each do |book| %>
+    <li>
+      <div class="bookcard">
+        <div class="bookimg">
+          <span></span>
+        </div>
+        <div class="bookinfo">
+          <p class="bookinfo__title"><%= book.name %></p>
+          <p class="bookinfo__author"><%= book.author %></p>
+          <p class="bookinfo__publisher"><%= book.publisher %></p>
+          <div class="bookinfo__buttons">
+          <%= link_to "detail", book_path(book), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

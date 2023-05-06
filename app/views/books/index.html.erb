@@ -1,9 +1,3 @@
 <div class="container">
-  <ul class="books-index">
-    <% @books.each do |book| %>
-      <li>
-        <%= render 'book_card', book: book %>
-      </li>
-    <% end %>
-  </ul>
+  <%= render 'book_card'%>
 </div>
