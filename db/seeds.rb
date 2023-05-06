@@ -25,12 +25,12 @@ puts "finished creating users!!"
 puts "Creating Books..."
 
 Book.create([
-  { name: "だるまちゃんとキジムナちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { name: "だるまちゃんとだるまちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { name: "だるまちゃんとかみなりちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { name: "だるまちゃんとてんぐちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { name: "だるまちゃんとうんこちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { name: "だるまちゃんとおにちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 }
+  { title: "だるまちゃんとキジムナちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { title: "だるまちゃんとだるまちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { title: "だるまちゃんとかみなりちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { title: "だるまちゃんとてんぐちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { title: "だるまちゃんとうんこちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
+  { title: "だるまちゃんとおにちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 }
 ])
 
 puts "done!"

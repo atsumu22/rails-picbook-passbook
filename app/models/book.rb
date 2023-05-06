@@ -4,7 +4,7 @@ class Book < ApplicationRecord
   has_many :users, through: :bookmarks
   has_many :users, through: :logs
 
-  validates :name, presence: true
+  validates :title, presence: true
   validates :author, presence: true
   validates :published_at, presence: true
   validates :publisher, presence: true

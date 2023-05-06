@@ -1,0 +1,18 @@
+<div class="d-flex flex-column">
+  <% @logs.each do |log| %>
+    <ul class="list-inline">
+      <li class="date">
+        <p><%= log.created_at.to_s.split(" ")[0] %></p>
+      </li>
+      <li class="title">
+        <p><%= log.book.title %></p>
+      </li>
+      <li class="author">
+        <p><%= log.book.author %></p>
+      </li>
+      <li class="price">
+        <p><%= log.book.original_price %></p>
+      </li>
+    </ul>
+  <% end %>
+</div>
