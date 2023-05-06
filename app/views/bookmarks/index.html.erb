@@ -1,6 +1,2 @@
 <h1>Your Bookmarks!!</h1>
-<h2>hello!!</h2>
-<h3>WORK!!!!</h3>
-<% @bookmarks.each do |bookmark| %>
-  <h1><%= bookmark.book.id %></h1>
-<% end %>
+<%= render 'bookmark_card' %>
