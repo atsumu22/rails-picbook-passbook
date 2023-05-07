@@ -1,5 +1,6 @@
 class BookmarksController < ApplicationController
   before_action :set_book, only: %i[new create]
+  protect_from_forgery :except => [:destroy]
 
   def index
     @user = current_user
@@ -28,6 +29,7 @@ class BookmarksController < ApplicationController
 
   def destroy
     @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
     @bookmark.destroy
     redirect_to bookmarks_path, status: :see_other
   end
