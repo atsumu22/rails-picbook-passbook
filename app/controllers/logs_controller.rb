@@ -27,6 +27,12 @@ class LogsController < ApplicationController
     end
   end
 
+  def destroy
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.destroy
+    redirect_to bookmarks_path, status: :see_other
+  end
+
   private
 
   def set_book

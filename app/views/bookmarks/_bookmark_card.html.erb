@@ -11,7 +11,9 @@
           <p class="bookinfo__publisher"><%= bookmark.book.publisher %></p>
           <div class="bookinfo__buttons">
             <button>+ Log</button>
-            <button>Delete</button>
+            <%= button_to bookmark_path(bookmark), method: :delete, data: { turbo: false } do %>
+              <i class="fa-solid fa-square-xmark"></i>
+            <% end %>
           </div>
         </div>
       </div>
