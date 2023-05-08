@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :bookmarks, only: %i[index destroy]
   resources :logs, only: %i[index destroy]
   resources :users, only: %i[edit update destroy]
+  get '/logsedit', to: 'pages#logsedit'
   get '/profile', to: 'users#profile'
   get '/search', to: 'pages#search'
   get '/query', to: 'pages#query'

@@ -11,14 +11,13 @@
         <p><%= log.book.author %></p>
       </li>
       <li class="price">
-        <p><%= number_to_currency(log.book.original_price, unit: "", strip_insignificant_zeros: true ) %></p>
+        <p><%= log.book.original_price %></p>
+      </li>
+      <li>
+        <%= button_to log_path(log), method: :delete, data: { turbo: false } do %>
+          <i class="fa-solid fa-square-xmark"></i>
+        <% end %>
       </li>
     </ul>
   <% end %>
-
-  <h2>
-    <%= number_to_currency(@total_sum, unit: "¥", strip_insignificant_zeros: true ) %>
-  </h2>
-
-
 </div>

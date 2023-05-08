@@ -4,6 +4,8 @@ class LogsController < ApplicationController
   def index
     @user = current_user
     @logs = policy_scope(Log).where(user: @user)
+    @prices = @logs.map {|log| log.book.original_price }
+    @total_sum = @prices.sum
   end
 
   def new
@@ -15,22 +17,27 @@ class LogsController < ApplicationController
     @log = Log.new
     @log.book = @book
     @log.user = current_user
-    @user = current_user
-    @logs = policy_scope(Log).where(user: @user)
-    @duplicated_checker = @logs.map do |log|
-      log.book == @book
-    end
     authorize @log
-    if @duplicated_checker.none?(true)
+    if not_duplicated_log?
       @log.save
       redirect_to logs_path
     end
   end
 
   def destroy
-    @bookmark = Bookmark.find(params[:id])
-    @bookmark.destroy
-    redirect_to bookmarks_path, status: :see_other
+    @log = Log.find(params[:id])
+    authorize @log
+    @log.destroy
+    redirect_to logsedit_path, status: :see_other
+  end
+
+  def not_duplicated_log?
+    @user = current_user
+    @logs = policy_scope(Log).where(user: @user)
+    duplicated_checker = @logs.map do |log|
+      log.book == @book
+    end
+    return duplicated_checker.none?(true)
   end
 
   private
