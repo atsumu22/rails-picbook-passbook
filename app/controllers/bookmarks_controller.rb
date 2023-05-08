@@ -5,6 +5,16 @@ class BookmarksController < ApplicationController
   def index
     @user = current_user
     @bookmarks = policy_scope(Bookmark).where(user: @user)
+    @logs = policy_scope(Log).where(user: @user)
+    @books_as_logs = @logs.map do |log|
+      log.book
+    end
+    @bookmarks.each do |bookmark|
+      if @books_as_logs.include?(bookmark.book)
+        bookmark.destroy
+      end
+    end
+    @log = Log.new
   end
 
   def new
@@ -16,13 +26,8 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new
     @bookmark.book = @book
     @bookmark.user = current_user
-    @user = current_user
-    @bookmarks = policy_scope(Bookmark).where(user: @user)
-    @duplicated_checker = @bookmarks.map do |bookmark|
-      bookmark.book == @book
-    end
     authorize @bookmark
-    if @duplicated_checker.none?(true)
+    if not_duplicated_bookmark?
       @bookmark.save
     end
   end
@@ -32,6 +37,24 @@ class BookmarksController < ApplicationController
     authorize @bookmark
     @bookmark.destroy
     redirect_to bookmarks_path, status: :see_other
+  end
+
+  def not_duplicated_bookmark?
+    @user = current_user
+    @bookmarks = policy_scope(Bookmark).where(user: @user)
+    duplicated_checker = @bookmarks.map do |bookmark|
+      bookmark.book == @book
+    end
+    return duplicated_checker.none?(true)
+  end
+
+  def not_duplicated_log?
+    @user = current_user
+    @logs = policy_scope(Log).where(user: @user)
+    duplicated_checker = @logs.map do |log|
+      log.book == @book
+    end
+    return duplicated_checker.none?(true)
   end
 
   private
