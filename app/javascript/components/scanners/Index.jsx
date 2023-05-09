@@ -9,7 +9,9 @@ const Index = () => {
   const onDetected = result => {
     setResult(result);
     setCamera(!camera)
-    window.location.href = '/scanners/' + result
+    const url = 'https://api.openbd.jp/v1/get?isbn=' + result
+    console.log(url)
+    // window.location.href = 'https://api.openbd.jp/v1/get?isbn='; + result
   };
 
   return (
