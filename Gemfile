@@ -76,3 +76,7 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form"
 gem "autoprefixer-rails"
 gem "pundit"
+gem "react-rails"
+gem 'openbd_api'
+
+gem "shakapacker", "= 6.6"
