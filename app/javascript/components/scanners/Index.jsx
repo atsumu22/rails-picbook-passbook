@@ -9,7 +9,7 @@ const Index = () => {
 
   const onDetected = result => {
     setResult(result);
-    // setCamera(!camera)
+    setCamera(!camera)
     // window.location.href = 'https://api.openbd.jp/v1/get?isbn='; + result
   };
 
@@ -17,7 +17,7 @@ const Index = () => {
     <section className="section-wrapper">
       <div className="section-title">
         <h1 className="section-title-text">
-          <Scanner onDetected={onDetected} />
+          {camera ? <Scanner onDetected={onDetected} /> : <p>この本でしょうか...？</p> }
         </h1>
         <div>
           {result && <BookCard result={result} />}
