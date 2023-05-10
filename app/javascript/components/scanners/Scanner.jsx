@@ -1,27 +1,6 @@
 import React, { useEffect } from "react";
 import Quagga from "quagga";
-
-const config = {
-  "inputStream": {
-    "type": "LiveStream",
-    "constraints": {
-      "width": { "min": 450 },
-      "height": { "min": 300 },
-      "facingMode": "environment",
-      "aspectRatio": { "min": 1, "max": 2 }
-    }
-  },
-  "locator": {
-    "patchSize": "medium",
-    "halfSample": true
-  },
-  "numOfWorkers": 2,
-  "frequency": 10,
-  "decoder": {
-    "readers": ["ean_reader"]
-  },
-  "locate": true
-}
+import config from "./config.json"
 
 const Scanner = (props) => {
   const { onDetected } = props;
@@ -84,7 +63,7 @@ const Scanner = (props) => {
   }, []);
 
   const detected = result => {
-    onDetected(result.codeResult.code);
+    result.codeResult.code.slice(0, 3) === "978" && onDetected(result.codeResult.code);
   };
 
   return (
