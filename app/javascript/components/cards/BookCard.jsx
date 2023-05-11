@@ -1,67 +1,63 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
+import styled from "styled-components";
+import PrimaryButton from '../buttons/PrimaryButton';
 
 const BookCard = (props) => {
-  const { result } = props;
-  const [ book, setBook ] = useState();
-
-  const fetchedData = axios.get(`https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&isbn=${result}&applicationId=1018371623494845154`).then((res) => {
-    if (res.data.Items.length === 0) {
-      fetchingFromOpenBD(result);
-    } else {
-      setBook({
-        title: res.data.Items[0].Item.title,
-        author: res.data.Items[0].Item.author,
-        publisher: res.data.Items[0].Item.publisherName,
-        imageUrl: res.data.Items[0].Item.mediumImageUrl,
-        price: res.data.Items[0].Item.itemPrice
-      })
-    };
-    // console.log(res.data.Items[0].Item);
-  });
-
-  const fetchingFromOpenBD = (result) => {
-    axios.get(`https://api.openbd.jp/v1/get?isbn=${result}`).then((res) => {
-      if (res.data[0] === null) {
-        // console.log("APIが存在しない")
-        setBook(null)
-      } else {
-        if (res.data[0].onix.ProductSupply.SupplyDetail.Price) {
-          console.log(res.data[0].onix.ProductSupply.SupplyDetail.Price[0].PriceAmount);
-          setBook({
-            title: res.data[0].summary.title,
-            author: res.data[0].summary.author,
-            publisher: res.data[0].summary.publisher,
-            imageUrl: res.data[0].summary.cover,
-            price: res.data[0].onix.ProductSupply.SupplyDetail.Price[0].PriceAmount
-            // priceのプロパティに演算子を設定。Price情報が存在するなら、価格詳細をプロパティ値としてセット、存在しない場合は"no-price"とかfalseを返すものをセット。あとで、ここの情報を取り出しやすいようにする。
-          })
-        } else {
-          console.log("価格情報が存在しません");
-          // 上の実装ができれば、ここのブロックは削除可能。
-        }
-      }
-    })
-  };
+  const { book } = props;
 
   return (
-    <div>
-      { book ?  <div className="bookcard">
-        <div className="bookimg">
-          <img src={book.imageUrl} alt="book-image" />
+    <SBookCard>
+      <img src={book.imageUrl} alt="book-image" />
+      <div className="bookinfo">
+        <div className="bookinfo__text">
+          <p className="bookinfo__text__title">{book.title}</p>
+          <p className="bookinfo__text__author">{book.author}</p>
+          <p className="bookinfo__text__publisher">{book.publisher}</p>
         </div>
-        <div className="bookinfo">
-          <p className="bookinfo__title">{book.title}</p>
-          <p className="bookinfo__author">{book.author}</p>
-          <p className="bookinfo__publisher">{book.publisher}</p>
-          <div className="bookinfo__buttons">
-          <button className="btn btn-primary">Detail</button>
-          </div>
+        <div className="bookinfo__button">
+          <PrimaryButton>Detail</PrimaryButton>
         </div>
       </div>
-      : <div className="bookcard"><h2>本情報が取得できませんでした。キーワード検索をご利用ください。</h2></div> }
-    </div>
+    </SBookCard>
   );
 };
+
+const SBookCard = styled.div`
+  background-color: #fff;
+  height: 150px;
+  box-shadow: 5px 5px 5px #7f7f7f;
+  border-radius: 15px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  & img {
+    width: auto;
+    height: 100%;
+    background-color: gray;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  & .bookinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    &__text {
+      &__title {
+        font-weight: bold;
+        margin: 0 0 3px 0;
+      }
+      &__author, &__publisher {
+        margin: 0;
+      }
+    }
+    &__button {
+      text-align: right;
+    }
+  }
+`;
 
 export default BookCard;

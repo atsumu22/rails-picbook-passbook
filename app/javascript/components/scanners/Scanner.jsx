@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Quagga from "quagga";
 import config from "./config.json"
+import styled from "styled-components";
+
 
 const Scanner = (props) => {
   const { onDetected } = props;
@@ -70,8 +72,45 @@ const Scanner = (props) => {
     // If you do not specify a target,
     // QuaggaJS would look for an element that matches
     // the CSS selector #interactive.viewport
-    <div id="interactive" className="viewport" />
+    <>
+      <SScannerContainer>
+        <SScanner id="interactive" className="viewport" />
+      </SScannerContainer>
+      <SNotation>☝️☝️☝️</SNotation>
+      <SNotation>
+        987から始まる上段のバーコードを画面に合わせてスキャンしてください
+      </SNotation>
+    </>
   );
 };
+
+const SScannerContainer = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100px;
+  overflow: hidden;
+`;
+
+const SScanner = styled.div`
+  width: 100vw;
+  height: 100px;
+  & canvas,video {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  & canvas.drawingBuffer,video.drawingBuffer {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+const SNotation = styled.p`
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+`;
 
 export default Scanner;
