@@ -3,22 +3,48 @@ import React, { useState } from 'react';
 
 const BookCard = (props) => {
   const { result } = props;
-  const [ book, setBook ] = useState({});
+  const [ book, setBook ] = useState();
 
   const fetchedData = axios.get(`https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&isbn=${result}&applicationId=1018371623494845154`).then((res) => {
-    res.data.Items.length === 0 ? console.log("APIが存在しない") : console.log(res.data.Items[0].Item.title);
-    console.log(res.data.Items[0].Item);
-    setBook({ title: res.data.Items[0].Item.title,
-              author: res.data.Items[0].Item.author,
-              publisher: res.data.Items[0].Item.publisherName,
-              imageUrl: res.data.Items[0].Item.mediumImageUrl,
-              price: res.data.Items[0].Item.itemPrice
-            })
+    if (res.data.Items.length === 0) {
+      fetchingFromOpenBD(result);
+    } else {
+      setBook({
+        title: res.data.Items[0].Item.title,
+        author: res.data.Items[0].Item.author,
+        publisher: res.data.Items[0].Item.publisherName,
+        imageUrl: res.data.Items[0].Item.mediumImageUrl,
+        price: res.data.Items[0].Item.itemPrice
+      })
+    };
+    // console.log(res.data.Items[0].Item);
   });
+
+  const fetchingFromOpenBD = (result) => {
+    axios.get(`https://api.openbd.jp/v1/get?isbn=${result}`).then((res) => {
+      if (res.data[0] === null) {
+        console.log("APIが存在しない")
+        setBook(null)
+      } else {
+        if (res.data[0].onix.ProductSupply.SupplyDetail.Price) {
+          console.log(res.data[0].onix.ProductSupply.SupplyDetail.Price[0].PriceAmount);
+          setBook({
+            title: res.data[0].summary.title,
+            author: res.data[0].summary.author,
+            publisher: res.data[0].summary.publisher,
+            imageUrl: res.data[0].summary.cover,
+            price: res.data[0].onix.ProductSupply.SupplyDetail.Price[0].PriceAmount
+          })
+        } else {
+          console.log("価格情報が存在しません");
+        }
+      }
+    })
+  };
 
   return (
     <div>
-       <div class="bookcard">
+      { book ?  <div class="bookcard">
         <div class="bookimg">
           <img src={book.imageUrl} alt="book-image" />
         </div>
@@ -31,6 +57,7 @@ const BookCard = (props) => {
           </div>
         </div>
       </div>
+      : <div class="bookcard"><h2>本情報が取得できませんでした。キーワード検索をご利用ください。</h2></div> }
     </div>
   );
 };
