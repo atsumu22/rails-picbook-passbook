@@ -78,5 +78,7 @@ gem "autoprefixer-rails"
 gem "pundit"
 gem "react-rails"
 gem 'openbd_api'
+gem 'nokogiri'
+gem 'open-uri'
 
 gem "shakapacker", "= 6.6"

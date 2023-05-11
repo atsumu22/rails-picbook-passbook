@@ -1,26 +1,35 @@
 import React from 'react';
 import styled from "styled-components";
-import PrimaryButton from '../buttons/PrimaryButton';
-import SecondaryButton from '../buttons/SuccessButton';
+import { BrowserRouter, Link } from "react-router-dom";
 import TextButton from '../buttons/TextButton';
+import axios from 'axios';
 
 const BookCard = (props) => {
   const { book } = props;
 
+  const onClickPost = (book) => {
+    axios.post('/scrape', book).then((res)=> {
+      console.log(res)
+    })
+  };
+
   return (
     <SBookCard>
-      <img src={book.imageUrl} alt="book-image" />
-      <div className="bookinfo">
-        <div className="bookinfo__text">
-          <p className="bookinfo__text__title">{book.title}</p>
-          <p className="bookinfo__text__author">{book.author}</p>
-          <p className="bookinfo__text__publisher">{book.publisher}</p>
+      <BrowserRouter>
+        { book.imageUrl && <img src={book.imageUrl} alt="book-image" />}
+        <div className="bookinfo">
+          <div className="bookinfo__text">
+            <p className="bookinfo__text__title">{book.title}</p>
+            <p className="bookinfo__text__author">{book.author}</p>
+            <p className="bookinfo__text__publisher">{book.publisher}</p>
+            <p className="bookinfo__text__publisher d-none">{book.price}</p>
+          </div>
+          <div className="bookinfo__button">
+            <Link to="/scrape" onClick={onClickPost(book)}><i class="fa-regular fa-square-plus"></i></Link>
+            <TextButton><i class="fa-regular fa-bookmark"></i></TextButton>
+          </div>
         </div>
-        <div className="bookinfo__button">
-          <TextButton><i class="fa-regular fa-square-plus"></i></TextButton>
-          <TextButton><i class="fa-regular fa-bookmark"></i></TextButton>
-        </div>
-      </div>
+      </BrowserRouter>
     </SBookCard>
   );
 };
