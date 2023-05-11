@@ -1,29 +1,63 @@
 import React from 'react';
 import styled from "styled-components";
+import PrimaryButton from '../buttons/PrimaryButton';
 
 const BookCard = (props) => {
   const { book } = props;
 
   return (
-    <div className="bookcard">
-      <div className="bookimg">
-        <img src={book.imageUrl} alt="book-image" />
-      </div>
+    <SBookCard>
+      <img src={book.imageUrl} alt="book-image" />
       <div className="bookinfo">
-        <p className="bookinfo__title">{book.title}</p>
-        <p className="bookinfo__author">{book.author}</p>
-        <p className="bookinfo__publisher">{book.publisher}</p>
-        <div className="bookinfo__buttons">
-        <button className="btn btn-primary">Detail</button>
+        <div className="bookinfo__text">
+          <p className="bookinfo__text__title">{book.title}</p>
+          <p className="bookinfo__text__author">{book.author}</p>
+          <p className="bookinfo__text__publisher">{book.publisher}</p>
+        </div>
+        <div className="bookinfo__button">
+          <PrimaryButton>Detail</PrimaryButton>
         </div>
       </div>
-    </div>
+    </SBookCard>
   );
 };
 
 const SBookCard = styled.div`
-
+  background-color: #fff;
+  height: 150px;
+  box-shadow: 5px 5px 5px #7f7f7f;
+  border-radius: 15px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  & img {
+    width: auto;
+    height: 100%;
+    background-color: gray;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  & .bookinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    &__text {
+      &__title {
+        font-weight: bold;
+        margin: 0 0 3px 0;
+      }
+      &__author, &__publisher {
+        margin: 0;
+      }
+    }
+    &__button {
+      text-align: right;
+    }
+  }
 `;
-
 
 export default BookCard;
