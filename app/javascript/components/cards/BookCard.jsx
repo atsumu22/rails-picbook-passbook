@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import PrimaryButton from '../buttons/PrimaryButton';
+import SecondaryButton from '../buttons/SuccessButton';
+import TextButton from '../buttons/TextButton';
 
 const BookCard = (props) => {
   const { book } = props;
@@ -15,7 +17,8 @@ const BookCard = (props) => {
           <p className="bookinfo__text__publisher">{book.publisher}</p>
         </div>
         <div className="bookinfo__button">
-          <PrimaryButton>Detail</PrimaryButton>
+          <TextButton><i class="fa-regular fa-square-plus"></i></TextButton>
+          <TextButton><i class="fa-regular fa-bookmark"></i></TextButton>
         </div>
       </div>
     </SBookCard>
@@ -56,6 +59,9 @@ const SBookCard = styled.div`
     }
     &__button {
       text-align: right;
+      display: flex;
+      flex-direction: raw;
+      justify-content: end;
     }
   }
 `;
