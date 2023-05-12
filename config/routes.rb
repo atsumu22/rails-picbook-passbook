@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   get '/search', to: 'pages#search'
   get '/query', to: 'pages#query'
   get '/barcode', to: 'pages#barcode'
-  get '/statistics', to: 'pages#statistics'
+  get '/scrape', to: 'pages#scrape'
 end

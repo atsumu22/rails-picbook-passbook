@@ -25,6 +25,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.1",
     "react_ujs": "^2.7.0",
     "shakapacker": "6.6.0",
     "style-loader": "^3.3.2",

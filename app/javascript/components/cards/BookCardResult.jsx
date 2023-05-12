@@ -27,20 +27,14 @@ const BookCardResult = (props) => {
         // console.log("APIが存在しない")
         setBook(null)
       } else {
-        if (res.data[0].onix.ProductSupply.SupplyDetail.Price) {
-          console.log(res.data[0].onix.ProductSupply.SupplyDetail.Price[0].PriceAmount);
           setBook({
             title: res.data[0].summary.title,
             author: res.data[0].summary.author,
             publisher: res.data[0].summary.publisher,
             imageUrl: res.data[0].summary.cover,
-            price: res.data[0].onix.ProductSupply.SupplyDetail.Price[0].PriceAmount
+            price: res.data[0].onix.ProductSupply.SupplyDetail.Price ? res.data[0].onix.ProductSupply.SupplyDetail.Price[0].PriceAmount : ""
             // priceのプロパティに演算子を設定。Price情報が存在するなら、価格詳細をプロパティ値としてセット、存在しない場合は"no-price"とかfalseを返すものをセット。あとで、ここの情報を取り出しやすいようにする。
           })
-        } else {
-          console.log("価格情報が存在しません");
-          // 上の実装ができれば、ここのブロックは削除可能。
-        }
       }
     })
   };
