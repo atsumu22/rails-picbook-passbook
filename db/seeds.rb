@@ -1,5 +1,3 @@
-require 'open-uri'
-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -25,12 +23,12 @@ puts "finished creating users!!"
 puts "Creating Books..."
 
 Book.create([
-  { title: "だるまちゃんとキジムナちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { title: "だるまちゃんとだるまちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { title: "だるまちゃんとかみなりちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { title: "だるまちゃんとてんぐちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { title: "だるまちゃんとうんこちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 },
-  { title: "だるまちゃんとおにちゃん", author: "かこさとし", published_at: "2000/10/10", publisher: "本の雑誌社", original_price: 1800 }
+  { title: "だるまちゃんとキジムナちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
+  { title: "だるまちゃんとだるまちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
+  { title: "だるまちゃんとかみなりちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
+  { title: "だるまちゃんとてんぐちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
+  { title: "だるまちゃんとうんこちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
+  { title: "だるまちゃんとおにちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 }
 ])
 
 puts "done!"

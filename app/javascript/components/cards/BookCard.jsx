@@ -7,9 +7,10 @@ import axios from 'axios';
 const BookCard = (props) => {
   const { book } = props;
 
-  const onClickPost = (book) => {
-    axios.post('/scrape', book).then((res)=> {
-      console.log(res)
+  const onClickPost = () => {
+    const bookData = {title: book.title, author: book.author, publisher: book.publisher, price: book.price, image_url: book.imageUrl }
+    console.log(bookData);
+    axios.post('http://localhost:3000/books', bookData).then(() => {
     })
   };
 
@@ -25,7 +26,8 @@ const BookCard = (props) => {
             <p className="bookinfo__text__publisher d-none">{book.price}</p>
           </div>
           <div className="bookinfo__button">
-            <Link to="/scrape" onClick={onClickPost(book)}><i class="fa-regular fa-square-plus"></i></Link>
+            <button onClick={onClickPost}><i class="fa-regular fa-square-plus"></i></button>
+            <Link to="/books">GO</Link>
             <TextButton><i class="fa-regular fa-bookmark"></i></TextButton>
           </div>
         </div>
