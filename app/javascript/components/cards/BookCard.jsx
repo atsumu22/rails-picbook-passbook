@@ -2,17 +2,9 @@ import React from 'react';
 import styled from "styled-components";
 import { BrowserRouter, Link } from "react-router-dom";
 import TextButton from '../buttons/TextButton';
-import axios from 'axios';
 
 const BookCard = (props) => {
   const { book } = props;
-
-  const onClickPost = () => {
-    const bookData = {title: book.title, author: book.author, publisher: book.publisher, price: book.price, image_url: book.imageUrl }
-    console.log(bookData);
-    axios.post('http://localhost:3000/books', bookData).then(() => {
-    })
-  };
 
   return (
     <SBookCard>
@@ -26,8 +18,7 @@ const BookCard = (props) => {
             <p className="bookinfo__text__publisher d-none">{book.price}</p>
           </div>
           <div className="bookinfo__button">
-            <button onClick={onClickPost}><i class="fa-regular fa-square-plus"></i></button>
-            <Link to="/books">GO</Link>
+            <Link to="/books/new"><i class="fa-regular fa-square-plus"></i></Link>
             <TextButton><i class="fa-regular fa-bookmark"></i></TextButton>
           </div>
         </div>
