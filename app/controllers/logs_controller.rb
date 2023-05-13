@@ -18,10 +18,8 @@ class LogsController < ApplicationController
     @log.book = @book
     @log.user = current_user
     authorize @log
-    if not_duplicated_log?
-      @log.save
-      redirect_to logs_path
-    end
+    @log.save
+    redirect_to logs_path
   end
 
   def destroy

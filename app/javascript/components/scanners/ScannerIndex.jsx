@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Scanner from "./Scanner";
 import BookCardResult from "../cards/BookCardResult";
+import AxiosGetAndPost from "../axios/axiosGetAndPost";
 
 const ScannerIndex = () => {
   const [camera, setCamera] = useState(true);
@@ -14,13 +15,13 @@ const ScannerIndex = () => {
 
   return (
     <section>
-      {camera ? <Scanner onDetected={onDetected} /> : "" }
+      {camera && <Scanner onDetected={onDetected} />}
       <div>
+        {/* {result && <BookCardResult result={result} />} */}
         {result && <BookCardResult result={result} />}
       </div>
     </section>
   );
 }
-
 
 export default ScannerIndex
