@@ -1,5 +1,6 @@
 class LogsController < ApplicationController
   before_action :set_book, only: %i[new create]
+  protect_from_forgery
 
   def index
     @user = current_user
@@ -29,18 +30,14 @@ class LogsController < ApplicationController
     redirect_to logsedit_path, status: :see_other
   end
 
-  def not_duplicated_log?
-    @user = current_user
-    @logs = policy_scope(Log).where(user: @user)
-    duplicated_checker = @logs.map do |log|
-      log.book == @book
-    end
-    return duplicated_checker.none?(true)
-  end
-
   private
 
   def set_book
-    @book = Book.find(params[:book_id])
+    # finding_book = Book.last
+    @book = Book.last
+  end
+
+  def book_params
+    params.permit(:title, :author, :publisher, :price, :image_url, :status)
   end
 end

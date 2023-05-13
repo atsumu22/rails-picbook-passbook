@@ -48,7 +48,7 @@ const BookCardResult = (props) => {
   useEffect(() => {
     if (isLoaded && book) {
       const bookData = {title: book.title, author: book.author, publisher: book.publisher, price: book.price, image_url: book.imageUrl }
-      console.log(bookData);
+      // console.log(bookData);
       axios.post('http://localhost:3000/books', bookData).then(() => {
       });
     }
