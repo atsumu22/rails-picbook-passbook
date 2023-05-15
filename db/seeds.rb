@@ -7,7 +7,6 @@
 #   Character.create(name: "Luke", movie: movies.first)
 puts "cleaning database..."
 Log.destroy_all
-Book.destroy_all
 User.destroy_all
 
 puts "Creating Users..."
@@ -18,16 +17,5 @@ User.create([
 ])
 
 puts "finished creating users!!"
-
-puts "Creating Books..."
-
-Book.create([
-  { title: "だるまちゃんとキジムナちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
-  { title: "だるまちゃんとだるまちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
-  { title: "だるまちゃんとかみなりちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
-  { title: "だるまちゃんとてんぐちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
-  { title: "だるまちゃんとうんこちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 },
-  { title: "だるまちゃんとおにちゃん", author: "かこさとし", publisher: "本の雑誌社", price: 1800 }
-])
 
 puts "done!"
