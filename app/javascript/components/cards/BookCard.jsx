@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import { BrowserRouter, Link } from "react-router-dom";
-import TextButton from '../buttons/TextButton';
+import axios from 'axios';
+
 
 const BookCard = (props) => {
   const { book } = props;
+  const [ isLoaded, setIsLoaded ] = useState(false);
+  const [ bookToData, setBookToData ] = useState();
+  const [ clicked, setClicked ] = useState(false);
+
+  const onClickPostToLog = () => {
+      book.status = 0;
+      axios.get("http://localhost:3000/books").then((res) => {
+        console.log(res)
+      })
+      // clicked || console.log(book);
+      // clicked || axios.post('http://localhost:3000/logs', book).then(() => {});
+      clicked || setClicked(true);
+  }
 
   return (
     <SBookCard>
       <BrowserRouter>
-        { book.imageUrl && <img src={book.imageUrl} alt="book-image" />}
+        { book.imageUrl ? <img src={book.imageUrl} alt="book-image" /> : <SPlaceHolder /> }
         <div className="bookinfo">
           <div className="bookinfo__text">
             <p className="bookinfo__text__title">{book.title}</p>
             <p className="bookinfo__text__author">{book.author}</p>
             <p className="bookinfo__text__publisher">{book.publisher}</p>
-            <p className="bookinfo__text__publisher d-none">{book.price}</p>
+            <p className="bookinfo__text__publisher d-none">¥{book.price.toLocaleString()}</p>
           </div>
           <div className="bookinfo__button">
-            <Link to="/books/new"><i class="fa-regular fa-square-plus"></i></Link>
-            <TextButton><i class="fa-regular fa-bookmark"></i></TextButton>
+            {/* <Link to="/books/new"><i class="fa-regular fa-square-plus"></i></Link> */}
+            <SButton onClick={onClickPostToLog} className={clicked && "active"}><i className="fa-regular fa-square-plus"></i></SButton>
+            <SButton><i className="fa-regular fa-bookmark"></i></SButton>
           </div>
         </div>
       </BrowserRouter>
@@ -67,5 +82,25 @@ const SBookCard = styled.div`
     }
   }
 `;
+
+const SPlaceHolder = styled.div`
+  background-color: gray;
+  opacity: 0.7;
+  width: 90px;
+  height: 150px;
+`;
+
+const SButton = styled.button`
+  background-color: white;
+  color: blue;
+  transition: all 0.3s;
+  border: none;
+  border-radius: 5px;
+  &.active {
+    background-color: blue;
+    color: white;
+  }
+`;
+
 
 export default BookCard;
