@@ -8,7 +8,8 @@ import { csrfToken } from '@rails/ujs';
 
 const BookCard = (props) => {
   const { book } = props;
-  const [ clicked, setClicked ] = useState(false);
+  const [ logClicked, setLogClicked ] = useState(false);
+  const [ BookmarkClicked, setBookmarkClicked ] = useState(false);
 
   const onClickPostToLog = () => {
     const bookData = {title: book.title, author: book.author, publisher: book.publisher, price: book.price, image_url: book.imageUrl, status: 0 }
@@ -18,7 +19,16 @@ const BookCard = (props) => {
     // axios.post('http://localhost:3000/books', {
       // book: {bookData}}).then(() => {});
     // console.log(bookData);
-    clicked || setClicked(true);
+    BookmarkClicked && setBookmarkClicked(false);
+    logClicked || setLogClicked(true);
+  }
+
+  const onClickPostToBookmark = () => {
+    const bookData = {title: book.title, author: book.author, publisher: book.publisher, price: book.price, image_url: book.imageUrl, status: 1 }
+    axios.defaults.headers.common['X-CSRF-Token'] = csrfToken();
+    axios.post('http://localhost:3000/books', bookData).then(() => {});
+    logClicked && setLogClicked(false);
+    BookmarkClicked || setBookmarkClicked(true);
   }
 
   return (
@@ -33,8 +43,8 @@ const BookCard = (props) => {
             <p className="bookinfo__text__publisher d-none">¥{book.price.toLocaleString()}</p>
           </div>
           <div className="bookinfo__button">
-            <SButton onClick={onClickPostToLog} className={clicked && "active"}><i className="fa-regular fa-square-plus"></i></SButton>
-            <SButton><i className="fa-regular fa-bookmark"></i></SButton>
+            <SButton onClick={onClickPostToLog} className={logClicked && "clicked"} disabled={logClicked && "disabled"}><i className="fa-regular fa-square-plus"></i></SButton>
+            <SButton onClick={onClickPostToBookmark}  className={BookmarkClicked && "clicked"} disabled={BookmarkClicked && "disabled"}><i className="fa-regular fa-bookmark"></i></SButton>
           </div>
         </div>
       </BrowserRouter>
@@ -96,7 +106,7 @@ const SButton = styled.button`
   transition: all 0.3s;
   border: none;
   border-radius: 5px;
-  &.active {
+  &.clicked {
     background-color: blue;
     color: white;
   }
