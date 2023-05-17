@@ -1,13 +1,15 @@
 class BooksController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index]
+  # skip_before_action :verify_authenticity_token
   protect_from_forgery
+  after_action :set_csrf_token_header
 
   def index
     @books = policy_scope(Book)
   end
 
   def show
-    # @book = Book.find(params[:id])
+    @book = Book.last
     @book = Book.new(book_params)
     @bookmark = Bookmark.new
     @log = Log.new
@@ -18,17 +20,20 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    @book.user = current_user
+    # @book.user_id = 2
     authorize @book
     # respond_to do |format|
-      @book.save
-    #  format.html
-    #   format.json { render json: @book }
+    @book.save
+    # raise
+      # format.html
+      # format.json { render json: @book }
     # end
   end
 
   private
 
   def book_params
-    params.permit(:title, :author, :publisher, :price, :image_url)
+    params.require(:book).permit(:title, :author, :publisher, :price, :image_url, :status)
   end
 end

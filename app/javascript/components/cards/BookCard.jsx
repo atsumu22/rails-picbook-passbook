@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import { BrowserRouter, Link } from "react-router-dom";
 import axios from 'axios';
+import { csrfToken } from '@rails/ujs';
+// -> important
 
 
 const BookCard = (props) => {
   const { book } = props;
-  const [ isLoaded, setIsLoaded ] = useState(false);
-  const [ bookToData, setBookToData ] = useState();
   const [ clicked, setClicked ] = useState(false);
 
   const onClickPostToLog = () => {
-      book.status = 0;
-      axios.get("http://localhost:3000/books").then((res) => {
-        console.log(res)
-      })
-      // clicked || console.log(book);
-      // clicked || axios.post('http://localhost:3000/logs', book).then(() => {});
-      clicked || setClicked(true);
+    const bookData = {title: book.title, author: book.author, publisher: book.publisher, price: book.price, image_url: book.imageUrl, status: 0 }
+    axios.defaults.headers.common['X-CSRF-Token'] = csrfToken();
+    // -> important
+    axios.post('http://localhost:3000/books', bookData).then(() => {});
+    // axios.post('http://localhost:3000/books', {
+      // book: {bookData}}).then(() => {});
+    // console.log(bookData);
+    clicked || setClicked(true);
   }
 
   return (
@@ -32,7 +33,6 @@ const BookCard = (props) => {
             <p className="bookinfo__text__publisher d-none">¥{book.price.toLocaleString()}</p>
           </div>
           <div className="bookinfo__button">
-            {/* <Link to="/books/new"><i class="fa-regular fa-square-plus"></i></Link> */}
             <SButton onClick={onClickPostToLog} className={clicked && "active"}><i className="fa-regular fa-square-plus"></i></SButton>
             <SButton><i className="fa-regular fa-bookmark"></i></SButton>
           </div>

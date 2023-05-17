@@ -3,7 +3,7 @@
     <% if user_signed_in? %>
       <div class="navbar-nav__left">
         <li class="nav-item active">
-          <%= link_to logs_path, class: "nav-link" do %>
+          <%= link_to books_path, class: "nav-link" do %>
             <i class="fa-solid fa-credit-card"></i>
           <% end %>
         </li>
@@ -19,7 +19,7 @@
 
       <div class="navbar-nav__right">
         <li class="nav-item">
-          <%= link_to bookmarks_path, class: "nav-link" do %>
+          <%= link_to books_path, class: "nav-link" do %>
             <i class="fa-solid fa-bookmark"></i>
           <% end %>
         </li>
