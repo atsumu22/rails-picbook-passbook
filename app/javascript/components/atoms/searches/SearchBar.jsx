@@ -1,31 +1,11 @@
-import React, { useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import React from 'react';
 
-const SearchBar = () => {
-  const [ searchTitle, setSearchTitle ] = useState(true);
-  const [ queryValue, setQueryValue ] = useState();
-  const handleChange = (event) => {
-    setQueryValue(event.currentTarget.value);
-  };
-
-  const onClickSearchTitle = () => {
-    console.log("title")
-  }
-
-  const onClickSearchAuthor = () => {
-    console.log("author")
-  }
+const SearchBar = (props) => {
+  const { placeholder, onChange, value } = props;
 
   return (
-    <>
-
-      <input className="form-search form-control" placeholder="本のタイトル、著者名" type="text" onChange={handleChange}/>
-    </>
+      <input className="form-search form-control" placeholder={placeholder} type="text" onChange={onChange} value={value}/>
   );
 };
-
 
 export default SearchBar;

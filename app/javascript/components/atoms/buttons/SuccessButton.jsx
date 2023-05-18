@@ -2,10 +2,10 @@ import React from 'react';
 import Button from '@mui/material/Button';
 
 const SecondaryButton = (props) => {
-  const { children } = props;
+  const { children, onClick } = props;
 
   return (
-    <Button variant="outlined">{children}</Button>
+    <Button variant="outlined" onClick={onClick}>{children}</Button>
   );
 };
 
