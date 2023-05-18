@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import BookCard from './BookCard';
+import styled from 'styled-components';
+import BookCard from '../atoms/cards/BookCard';
 
-const BookCardResult = (props) => {
+const AxiosGetAndPost = (props) => {
   const { result } = props;
+  const [ error, setError ] = useState(null);
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ book, setBook ] = useState();
 
@@ -18,18 +20,22 @@ const BookCardResult = (props) => {
           author: res.data.Items[0].Item.author,
           publisher: res.data.Items[0].Item.publisherName,
           imageUrl: res.data.Items[0].Item.mediumImageUrl,
-          price: Math.round(res.data.Items[0].Item.itemPrice / 1.1)
+          price: res.data.Items[0].Item.itemPrice
         });
       };
       // console.log(res.data.Items[0].Item);
+    },
+    (error) => {
+      setIsLoaded(true);
+      setError(error);
     });
 
     const fetchingFromOpenBD = (result) => {
       axios.get(`https://api.openbd.jp/v1/get?isbn=${result}`).then((res) => {
         if (res.data[0] === null) {
           // console.log("APIが存在しない")
-          setBook(null)
           setIsLoaded(true);
+          setBook(null);
         } else {
             setIsLoaded(true);
             setBook({
@@ -41,19 +47,34 @@ const BookCardResult = (props) => {
               // priceのプロパティに演算子を設定。Price情報が存在するなら、価格詳細をプロパティ値としてセット、存在しない場合は"no-price"とかfalseを返すものをセット。あとで、ここの情報を取り出しやすいようにする。
             })
         }
-      })
-    }
+      },
+      (error) => {
+        setIsLoaded(true);
+        setError(error);
+      });
+    };
   }, []);
 
-  if (!isLoaded) {
-    return <h2>読み込み中</h2>
+
+  if (error) {
+    return <SError>エラー！読み込みに失敗しました。再度スキャンを試してください。</SError>
+  } else if (!isLoaded) {
+    return <SLoader>Loading...</SLoader>
+  } else if (book === null ) {
+    return <SError>Sorry...,本情報が取得できませんでした。キーワード検索をご利用ください。</SError>
   } else {
-    return (
-      <div>
-        { book ?  <BookCard book={book} /> : <div className="bookcard"><h2>本情報が取得できませんでした。キーワード検索をご利用ください。</h2></div> }
-      </div>
-    );
+    return <BookCard book={book} />
   }
 };
 
-export default BookCardResult;
+const SError = styled.h2`
+  color: red;
+  font-weight: bold;
+`;
+
+const SLoader = styled.h2`
+  color: blue;
+  font-weight: bold;
+`;
+
+export default AxiosGetAndPost;
