@@ -35,7 +35,7 @@ class BooksController < ApplicationController
       flash.now[:notice] = "『#{@book.title}』はすでに通帳に記録されています。"
       render :index
     elsif @duplicate_book && @duplicate_book.status != @book.status
-    # 既に要素は存在するが、statusがことなるパターン　-> インスタンスは生成せず、statusを切り替える。
+    # 既に要素は存在するが、statusがことなるパターン-> インスタンスは生成せず、statusを切り替える。
       # if @duplicate_book.bookmark?
         # @duplicate_book.log!
         # flash[:notice] = "ブックマークされていた本を通帳に記録しました。"

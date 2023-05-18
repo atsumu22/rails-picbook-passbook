@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Scanner from "./Scanner";
-import BookCardResult from "../cards/BookCardResult";
-import AxiosGetAndPost from "../axios/axiosGetAndPost";
+import BookCardResult from "../molecules/barcodeResults/BookCardResult";
 
 const ScannerIndex = () => {
   const [camera, setCamera] = useState(true);
